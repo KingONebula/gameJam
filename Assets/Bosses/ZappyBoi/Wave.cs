@@ -2,34 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriAttack : MonoBehaviour
+public class Wave : MonoBehaviour
 {
     // Start is called before the first frame update
     Timer timer;
-    [SerializeField]int cycleTime;
+    [SerializeField] float cycleTime;
     int previousTick;
-    int posY;
-    [SerializeField] float y;
-    [SerializeField]GameObject projectileWall;
-    void Start()
+    [SerializeField] GameObject projectileWall;
+    Transform[] spawnSpots;
+    void Awake()
     {
-
-        posY = 1;
-        y = posY + 2;
-        timer = new Timer(7);
+        timer = new Timer(100000000);
         timer.setTimer(cycleTime);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
         timer.timeUpdate();
         if (previousTick != timer.tick)
         {
-            posY *= -1;
-            transform.position = new Vector3(transform.position.x, transform.position.y + y * posY);
-            Instantiate(projectileWall, transform);
+            Instantiate(projectileWall, spawnSpots[timer.tick]);
             previousTick = timer.tick;
         }
         if (timer.timeEnd)

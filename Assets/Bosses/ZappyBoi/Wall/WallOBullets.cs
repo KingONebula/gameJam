@@ -10,8 +10,9 @@ public class WallOBullets : MonoBehaviour
     Rigidbody2D rb;
     void Start()
     {
+        transform.SetParent(null);
         timer = new Timer();
-        timer.setTimer(3);
+        timer.setTimer(7);
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = new Vector3(speed, 0, 0);
     }

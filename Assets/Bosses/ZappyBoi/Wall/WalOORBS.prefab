@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1121176499981549482
 MonoBehaviour:
@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e06b62b7df72c0b41a2a6a7c5d0e50c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cycleTime: 3
-  y: 2
-  projectileWall: {fileID: 0}
+  cycleTime: 1.5
+  y: 4
+  projectileWall: {fileID: 2684895404836939900, guid: 02ff5587f6ff2f442bc3e411870745cc, type: 3}

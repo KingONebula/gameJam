@@ -730,15 +730,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bosses2: []
   bossLookUp:
-  - {fileID: 803950885792825342, guid: 7150e3e3c9d284f4ca36bc9f3b1ab836, type: 3}
   - {fileID: 1744798303589223529, guid: 06ddc2b10200be245b72153af64dbc2a, type: 3}
-  - {fileID: 803950885792825342, guid: 8d24927411884df408a7b60de97eaae6, type: 3}
-  - {fileID: 803950885792825342, guid: 2c1c88ffb96de3b4da42a1e871fb1319, type: 3}
-  - {fileID: 803950885792825342, guid: 3ec1028f98dda5142a7fe39f9da9b1ea, type: 3}
-  - {fileID: 803950885792825342, guid: 3ec1028f98dda5142a7fe39f9da9b1ea, type: 3}
-  - {fileID: 803950885792825342, guid: 3ec1028f98dda5142a7fe39f9da9b1ea, type: 3}
-  - {fileID: 803950885792825342, guid: 3ec1028f98dda5142a7fe39f9da9b1ea, type: 3}
-  - {fileID: 803950885792825342, guid: 3ec1028f98dda5142a7fe39f9da9b1ea, type: 3}
   bonus: []
   boonslookup:
   - {fileID: 5351117855465576129, guid: 276637d9b0eed484ca1805834cf5feea, type: 3}

@@ -11,6 +11,7 @@ public class Gun : MonoBehaviour
     [SerializeField]GameObject bulletType, bulletSpawn;
     Camera cam;
     public bool disable;
+    [SerializeField]AudioSource gunShot;
     void Start()
     {
         cam = Camera.main;
@@ -32,6 +33,7 @@ public class Gun : MonoBehaviour
     }
     public Vector2 shoot(float crit, float accur)
     {
+        gunShot.Play();
         if (!timer.timeEnd)
         {
             return Vector2.zero;

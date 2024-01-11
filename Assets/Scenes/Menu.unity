@@ -730,6 +730,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bosses2: []
   bossLookUp:
+  - {fileID: 3312529282199569800, guid: 750b7a59817adb541899043cbd600e76, type: 3}
   - {fileID: 1744798303589223529, guid: 06ddc2b10200be245b72153af64dbc2a, type: 3}
   bonus: []
   boonslookup:

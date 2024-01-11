@@ -16,7 +16,7 @@ public class TriAttack : MonoBehaviour
 
         posY = 1;
         y = posY * 14f;
-        timer = new Timer(100000000);
+        timer = new Timer(5);
         timer.setTimer(cycleTime);
     }
 

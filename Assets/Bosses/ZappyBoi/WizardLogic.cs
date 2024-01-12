@@ -11,16 +11,13 @@ public class WizardLogic : MonoBehaviour
     int wayPointIndex;
     [SerializeField] Vector3 oldWaypoint, nextWaypoint, cVelocity;
     Timer timer, move, moveTime;
-    bool attacking, charge;
-
-    float moveSpeed;
+    bool attacking;
 
     //customVar
     [SerializeField] int health;
 
     void Start()
     {
-        moveSpeed = 50;
         health = 20;
         wayPointIndex = waypoints.Length;
         rb = GetComponent<Rigidbody2D>();
@@ -91,7 +88,6 @@ public class WizardLogic : MonoBehaviour
     //lazer code
     IEnumerator barrage_List()
     {
-        moveSpeed = 250;
         attacking = true;
         setNextPoint(waypoints[2].position, 0.5f);
         //Play VFX

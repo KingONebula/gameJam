@@ -6,8 +6,8 @@ public class Gate : MonoBehaviour
 {
 
 
-
-    [SerializeField]bool open, debug;
+    [SerializeField] GameObject[] lightOBJ;
+    [SerializeField]bool open, debug, lightsoff;
     [SerializeField]float doorOpen, time, maxtime, doorClose, pos;
     private void Start()
     {
@@ -32,6 +32,14 @@ public class Gate : MonoBehaviour
         {
             time = Mathf.Clamp(time + Time.deltaTime, 0, maxtime);
             pos = Mathf.Lerp(doorOpen, doorClose, time / maxtime);
+            if (time == maxtime && !lightsoff)
+            {
+                foreach(GameObject obj in lightOBJ)
+                {
+                    obj.SetActive(false);
+                }
+                lightsoff = true;
+            }
         }
         transform.position = new Vector3(transform.position.x, pos);
     }

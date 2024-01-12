@@ -6,11 +6,8 @@ public class barrageAttack : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField]GameObject bullet;
-    [SerializeField] bool isLast;
-    private void Awake()
+    private void OnEnable()
     {
         Instantiate(bullet, transform.position, transform.rotation);
-        if (isLast)
-            Destroy(gameObject.transform.parent.gameObject);
     }
 }

@@ -6,12 +6,13 @@ public class WizardLogic : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] Transform[] waypoints;
-    [SerializeField] GameObject wave, wall, barrageL, barrageR;
+    [SerializeField] GameObject wave, wall, barrageL, barrageR,handL, handR;
     Rigidbody2D rb;
     int wayPointIndex;
     [SerializeField] Vector3 oldWaypoint, nextWaypoint, cVelocity;
     Timer timer, move, moveTime;
     bool attacking;
+    [SerializeField]Animator animator;
 
     //customVar
     [SerializeField] int health;
@@ -93,12 +94,18 @@ public class WizardLogic : MonoBehaviour
         //Play VFX
         yield return new WaitForSeconds(0.5f);
         //PlayVFX
-        Instantiate(barrageL, waypoints[2]);
-        yield return new WaitForSeconds(2.5f);
+        barrageL.SetActive(true);
+        handL.SetActive(false);
+        yield return new WaitForSeconds(3f);
+        barrageL.SetActive(false);
+        handL.SetActive(true);
         setNextPoint(waypoints[1].position, 0.5f);
         yield return new WaitForSeconds(0.5f);
-        Instantiate(barrageR, waypoints[1]);
-        yield return new WaitForSeconds(2.5f);
+        handR.SetActive(false);
+        barrageR.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        barrageR.SetActive(false);
+        handR.SetActive(true);
         CalcNextPoint();
         attacking = false;
     }
@@ -110,8 +117,9 @@ public class WizardLogic : MonoBehaviour
         attacking = true;
         setNextPoint( waypoints[0].position, 1);
         yield return new WaitForSeconds(1.5f);
-        Instantiate (wall, waypoints[2].position+Vector3.left*3+Vector3.up*3, Quaternion.identity);
-        yield return new WaitForSeconds(1);
+        animator.SetTrigger("wall");
+        Instantiate(wall, waypoints[2].position + Vector3.left * 3 + Vector3.up * 5, Quaternion.identity);
+        yield return new WaitForSeconds(3);
         CalcNextPoint();
         attacking = false;
 

@@ -55,6 +55,6 @@ public class Gun : MonoBehaviour
     public void setParent(GameObject parent)
     {
         transform.SetParent(parent.transform);
-        transform.localPosition = Vector2.zero;
+        transform.localPosition = Vector2.zero-Vector2.down*0.15f;
     }
 }

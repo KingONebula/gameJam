@@ -6,4 +6,5 @@ public class ProjectileData : MonoBehaviour
 {
     public int damage;
     public float crit;
+    public string owner;
 }

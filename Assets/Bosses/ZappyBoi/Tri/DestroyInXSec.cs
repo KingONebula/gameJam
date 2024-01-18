@@ -5,17 +5,10 @@ using UnityEngine;
 public class DestroyInXSec : MonoBehaviour
 {
     // Start is called before the first frame update
-    Timer timer;
+    [SerializeField] float destroytime;
     void Start()
     {
-        timer.setTimer(1);
+        Destroy(gameObject, destroytime);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        timer.timeUpdate();
-        if (timer.timeEnd)
-            Destroy(gameObject);
-    }
 }

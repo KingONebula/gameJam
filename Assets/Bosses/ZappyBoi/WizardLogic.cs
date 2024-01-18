@@ -6,12 +6,12 @@ public class WizardLogic : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] Transform[] waypoints;
-    [SerializeField] GameObject wave, wall, barrageL, barrageR,handL, handR;
+    [SerializeField] GameObject wave, wall, barrageL, barrageR,handL, handR,triPref;
     Rigidbody2D rb;
     int wayPointIndex;
     [SerializeField] Vector3 oldWaypoint, nextWaypoint, cVelocity;
-    Timer timer, move, moveTime;
-    bool attacking;
+    Timer timer, move, moveTime, acceleration;
+    bool attacking, aceelBool;
     [SerializeField]Animator animator;
 
     //customVar
@@ -19,6 +19,7 @@ public class WizardLogic : MonoBehaviour
 
     void Start()
     {
+        acceleration = new Timer(3);
         health = 20;
         wayPointIndex = waypoints.Length;
         rb = GetComponent<Rigidbody2D>();
@@ -36,11 +37,11 @@ public class WizardLogic : MonoBehaviour
 
         if (move.timeEnd)
         {
-            move.setTimer(5);
+            move.setTimer(3);
             switch (Random.Range(0, 4))
             {
                 case 0:
-                    StartCoroutine(barrage_List());
+                    StartCoroutine(tri_Attack());
                     break;
                 case 1:
                     StartCoroutine(wall_List());
@@ -81,10 +82,11 @@ public class WizardLogic : MonoBehaviour
         wayPointIndex++;
         if (wayPointIndex == waypoints.Length)
         {
-            wayPointIndex = 0;
+
+            wayPointIndex = 1;
         }
         Vector3 offset = Random.insideUnitCircle;
-        setNextPoint( waypoints[wayPointIndex].position + offset, 1);
+        setNextPoint( waypoints[wayPointIndex].position + offset, 2);
     }
     //lazer code
     IEnumerator barrage_List()
@@ -124,11 +126,27 @@ public class WizardLogic : MonoBehaviour
         attacking = false;
 
     }
+    IEnumerator tri_Attack()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        attacking = true;
+        setNextPoint(waypoints[Random.Range(0,2)].position, 1);
+        yield return new WaitForSeconds(1.5f);
+        Instantiate(triPref, player.transform.position, Quaternion.Euler(0,0,0));
+        yield return new WaitForSeconds(1.5f);
+        Instantiate(triPref, player.transform.position, Quaternion.Euler(0, 0, 60));
+        yield return new WaitForSeconds(1.5f);
+        Instantiate(triPref, player.transform.position, Quaternion.Euler(0, 0, 120));
+        yield return new WaitForSeconds(1);
+        CalcNextPoint();
+        attacking = false;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Bullet")
         {
             ProjectileData bullet = collision.GetComponent<ProjectileData>();
+            if(bullet.owner=="boss")
             if (Random.value < bullet.crit)
             {
                 bullet.damage += (bullet.damage / 2) + 1;
@@ -142,5 +160,9 @@ public class WizardLogic : MonoBehaviour
             }
         }
 
+    }
+    void movePosition()
+    {
+        acceleration.timeUpdate();
     }
 }

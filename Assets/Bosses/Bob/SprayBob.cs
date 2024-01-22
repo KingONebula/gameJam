@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SprayPewPew : MonoBehaviour
+public class SprayBob : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField]GameObject bullet, spawn;
@@ -16,12 +16,14 @@ public class SprayPewPew : MonoBehaviour
         startAngle = 180 * headTos;
         if(startAngle < 0) { startAngle = 0; }
         angle = startAngle;
-        degSecond = -30 * headTos;
+        degSecond = 30 * headTos;
         transform.rotation = Quaternion.Euler(0, 0, startAngle);
         StartCoroutine(pewpewpew());
     }
     IEnumerator pewpewpew()
     {
+        Instantiate(bullet, spawn.transform.position, transform.rotation);
+        yield return new WaitForSeconds(.5f);
         Instantiate(bullet, spawn.transform.position, transform.rotation);
         yield return new WaitForSeconds(.5f);
         Instantiate(bullet, spawn.transform.position, transform.rotation);

@@ -6,6 +6,7 @@ public class PlayerData : MonoBehaviour
 {
     // Start is called before the first frame update
     public static PlayerData instance { get; private set; }
+    public static GunScrOBJ gunInHand;
     public static float crit, speed, accuracy, damagereduction, dogde;
     public static int maxHealth;
     public static int wave;
@@ -121,5 +122,12 @@ public class PlayerData : MonoBehaviour
     {
         return maxHealth;
     }
-
+    public void setGun(GunScrOBJ gun)
+    {
+        gunInHand = gun;
+    }
+    public GunScrOBJ getGun()
+    {
+        return gunInHand;
+    }
 }

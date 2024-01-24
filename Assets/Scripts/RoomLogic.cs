@@ -42,6 +42,6 @@ public class RoomLogic : MonoBehaviour
             gate.door();
         }
         yield return new WaitForSeconds(0.5f);
-        Instantiate(FloorData.boss, bossSpawn);
+        //Instantiate(FloorData.boss, bossSpawn);
     }
 }

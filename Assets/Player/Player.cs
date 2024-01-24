@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
         maxhealthInt = instance.maxHealthR();
         rb = GetComponent<Rigidbody2D>();
         physics = new PhysicsController(rb);
+        gun = Instantiate(instance.getGun().prefGun.GetComponent<Gun>());
         gun.setParent(gameObject);
         healthInt = maxhealthInt;
         health.setMax(maxhealthInt);

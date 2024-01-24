@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     Rigidbody2D rb;
     [SerializeField] int speed;
+    [SerializeField] string owner;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -19,6 +20,7 @@ public class Bullet : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.gameObject.tag!=owner)
         Destroy(gameObject);
     }
 }

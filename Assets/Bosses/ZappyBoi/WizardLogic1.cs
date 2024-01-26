@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WizardLogic : MonoBehaviour
+public class WizardLogic1 : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] Transform[] waypoints;
@@ -49,8 +49,8 @@ public class WizardLogic : MonoBehaviour
         whiteflash.color = new Color(1, 1, 1, 1 - flashtime.getPercent());
         if (move.timeEnd)
         {
-            move.setTimer(3);
-            switch (Random.Range(0, 4))
+            move.setTimer(2.5f);
+            switch (Random.Range(0, 3))
             {
                 case 0:
                     StartCoroutine(tri_Attack());
@@ -166,7 +166,6 @@ public class WizardLogic : MonoBehaviour
             if (health <= 0)
             {
                 StartCoroutine(death());
-                print("pp");
             }
         }
 

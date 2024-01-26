@@ -23,6 +23,7 @@ public class RicoLogic : MonoBehaviour
     int health;
     void Awake()
     {
+        MusicManager.instance.playMusic();
         source = GetComponent<AudioSource>();
         flashtime = new Timer();
         flashtime.setTimer(0);
@@ -131,6 +132,7 @@ public class RicoLogic : MonoBehaviour
     }
     IEnumerator death()
     {
+        MusicManager.instance.stopMusic();
         collidr.enabled = false;
         body.gravityScale = 0.25f;
         deathparticles.gameObject.SetActive(true);

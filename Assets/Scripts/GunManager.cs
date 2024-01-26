@@ -7,9 +7,10 @@ public class GunManager : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField]GameObject currentgun;
     [SerializeField]Player player;
-    void Awake()
+    IEnumerator Start()
     {
-        currentgun = FindAnyObjectByType<Gun>().gameObject;
+        yield return new WaitForSeconds(10f);
+        currentgun = GetComponentInChildren<Gun>().gameObject;
         player = FindAnyObjectByType<Player>();
     }
 

@@ -75,8 +75,7 @@ public class Angel_Logic : MonoBehaviour
         {
             wayPointIndex = 0;
         }
-        Vector3 offset = Random.insideUnitCircle;
-        nextWaypoint = waypoints[wayPointIndex].position + offset;
+        nextWaypoint = waypoints[wayPointIndex].position;
     }
     //lazer code
     IEnumerator lazer_List()
@@ -86,7 +85,7 @@ public class Angel_Logic : MonoBehaviour
         transform.position = new Vector2(100, 100);
         //Play VFX
         yield return new WaitForSeconds(0);
-        transform.position = new Vector2(0, 8);
+        transform.position = waypoints[1].position;
         //PlayVFX
         yield return new WaitForSeconds(0);
         Instantiate(beam, transform);
@@ -127,7 +126,7 @@ public class Angel_Logic : MonoBehaviour
         transform.position = new Vector2(100, 100);
         //Play VFX
         yield return new WaitForSeconds(0);
-        transform.position = new Vector2(0, 8);
+        transform.position = waypoints[1].position;
         //Play VFX
         yield return new WaitForSeconds(0);
         int i = 0;

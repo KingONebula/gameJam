@@ -7,9 +7,10 @@ public class GunManager : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField]GameObject currentgun;
     [SerializeField]Player player;
-    void Start()
+    void Awake()
     {
-        
+        currentgun = FindAnyObjectByType<Gun>().gameObject;
+        player = FindAnyObjectByType<Player>();
     }
 
     // Update is called once per frame
@@ -34,6 +35,8 @@ public class GunManager : MonoBehaviour
             gun = currentgun.GetComponent<Gun>();
             gun.setParent(gameObject);
             player.gun = gun;
+            PlayerData.instance.setGun(gun.gungun);
+            FightTrigger.instance.endBoss();
         }
     }
 }

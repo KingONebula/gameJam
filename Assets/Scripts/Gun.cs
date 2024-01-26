@@ -11,14 +11,23 @@ public class Gun : MonoBehaviour
     [SerializeField]GameObject bulletType, bulletSpawn;
     Camera cam;
     public bool disable;
+    public GunScrOBJ gungun;
     [SerializeField]AudioSource gunShot;
-    void Start()
+    SpriteRenderer spriteRenderer;
+    void Awake()
     {
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         cam = Camera.main;
         timer = new Timer();
     }
     private void Update()
     {
+        if(bulletSpawn.transform.position.x < transform.position.x)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else
+        spriteRenderer.flipX = false;
         if(!disable)
         aim();
         timer.timeUpdate();
@@ -33,11 +42,12 @@ public class Gun : MonoBehaviour
     }
     public Vector2 shoot(float crit, float accur)
     {
-        gunShot.Play();
+        
         if (!timer.timeEnd)
         {
             return Vector2.zero;
         }
+        gunShot.Play();
         timer.setTimer(reloadTime);
         for (int i = 0; i < shots; i++)
         {

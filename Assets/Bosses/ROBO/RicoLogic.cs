@@ -5,14 +5,28 @@ using UnityEngine;
 public class RicoLogic : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField] AudioClip impact;
+    AudioSource source;
+
     [SerializeField] GameObject aimLSpot, aimRSpot, laserLSpot, laserRSpot, spraySpot;
     [SerializeField] GameObject aim, laserL, laserR, spray, rico;
     Transform nextpoint;
     Rigidbody2D body;
-    Timer attackTime;
+    Timer attackTime, flashtime;
     bool attacking;
-    void Start()
+    [SerializeField]SpriteRenderer whiteflash;
+    [SerializeField] ParticleSystem deathparticles;
+    [SerializeField] GameObject gun, gunspawn;
+    [SerializeField] CircleCollider2D collidr;
+    
+    //Stats
+    int health;
+    void Awake()
     {
+        source = GetComponent<AudioSource>();
+        flashtime = new Timer();
+        flashtime.setTimer(0);
+        health = 30;
         body = GetComponent<Rigidbody2D>();
         attackTime = new Timer();
         attackTime.setTimer(1.5f);
@@ -22,6 +36,8 @@ public class RicoLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        flashtime.timeUpdate();
+        whiteflash.color = new Color(1, 1, 1, 1-flashtime.getPercent());
         if (Vector3.Distance(nextpoint.transform.position, transform.position) > 0.1)
             body.velocity = Vector3.ClampMagnitude(nextpoint.position - transform.position, 1) * 4;
         else
@@ -76,17 +92,50 @@ public class RicoLogic : MonoBehaviour
         yield return new WaitUntil(() => Vector3.Distance(nextpoint.position, transform.position) < 0.1);
         lazer.SetActive(true);
         yield return new WaitForSeconds(attacktime);
-        attacking = false;
+        
         attackTime.setTimer(1.5f);
-        StopCoroutine(imafirenmalaser(lazer, 0));
+        attacking = false;
+        StopAllCoroutines();
     }
     IEnumerator aimAtPlayer()
     {
         yield return new WaitUntil(()=> Vector3.Distance(nextpoint.position, transform.position) <0.1);
         aim.SetActive(true);
         yield return new WaitForSeconds(3);
-        attacking = false;
+        
         attackTime.setTimer(1.5f);
-        StopCoroutine(aimAtPlayer());
+        attacking = false;
+        StopAllCoroutines();
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            source.PlayOneShot(impact);
+            flashtime.setTimer(0.25f);
+            ProjectileData bullet = collision.GetComponent<ProjectileData>();
+            if (bullet.owner == "boss")
+                if (Random.value < bullet.crit)
+                {
+                    bullet.damage += (bullet.damage / 2) + 1;
+                    Debug.Log("Crit");
+                }
+            health -= bullet.damage;
+            if (health <= 0)
+            {
+                //RoomLogic.instance.startEnd = true;
+                //Destroy(gameObject);
+                StartCoroutine(death());
+            }
+        }
+    }
+    IEnumerator death()
+    {
+        collidr.enabled = false;
+        body.gravityScale = 0.25f;
+        deathparticles.gameObject.SetActive(true);
+        this.enabled= false;
+        yield return new WaitForSeconds(1f);
+        Instantiate(gun, gunspawn.transform);
     }
 }

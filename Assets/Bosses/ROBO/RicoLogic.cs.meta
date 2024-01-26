@@ -3,7 +3,23 @@ guid: 64cdb31ab50f4fb4484ece1bc97dc5aa
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - impact: {fileID: 8300000, guid: bd7d8af6f0d6c6146967d888455ad1d4, type: 3}
+  - aimLSpot: {instanceID: 0}
+  - aimRSpot: {instanceID: 0}
+  - laserLSpot: {instanceID: 0}
+  - laserRSpot: {instanceID: 0}
+  - spraySpot: {instanceID: 0}
+  - aim: {instanceID: 0}
+  - laserL: {instanceID: 0}
+  - laserR: {instanceID: 0}
+  - spray: {instanceID: 0}
+  - rico: {instanceID: 0}
+  - whiteflash: {instanceID: 0}
+  - deathparticles: {instanceID: 0}
+  - gun: {instanceID: 0}
+  - gunspawn: {instanceID: 0}
+  - collidr: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -5,16 +5,29 @@ using UnityEngine;
 public class FightTrigger : MonoBehaviour
 {
     bool fight;
+    public static FightTrigger instance;
     [SerializeField] GameObject boss, spawn;
+    [SerializeField] Gate[] doors;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!fight && collision.tag == "Player")
         {
             fight = true;
-            if(boss!=null)
+            foreach (Gate gate in doors)
+            {
+                gate.door();
+            }
+            if (boss!=null)
                 Instantiate(boss, spawn.transform);
             else
             RoomLogic.instance.startFight();
+        }
+    }
+    public void endBoss()
+    {
+        foreach (Gate gate in doors)
+        {
+            gate.door();
         }
     }
 }

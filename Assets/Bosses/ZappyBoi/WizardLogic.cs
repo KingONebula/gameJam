@@ -10,15 +10,17 @@ public class WizardLogic : MonoBehaviour
     Rigidbody2D rb;
     int wayPointIndex;
     [SerializeField] Vector3 oldWaypoint, nextWaypoint, cVelocity;
-    Timer timer, move, moveTime, acceleration;
+    Timer timer, move, moveTime, acceleration, flashtime;
     bool attacking, aceelBool;
     [SerializeField]Animator animator;
-
+    [SerializeField] SpriteRenderer whiteflash;
     //customVar
     [SerializeField] int health;
 
     void Start()
     {
+        flashtime = new Timer();
+        flashtime.setTimer(0);
         acceleration = new Timer(3);
         health = 20;
         wayPointIndex = waypoints.Length;
@@ -34,7 +36,8 @@ public class WizardLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        flashtime.timeUpdate();
+        whiteflash.color = new Color(1, 1, 1, 1 - flashtime.getPercent());
         if (move.timeEnd)
         {
             move.setTimer(3);
@@ -145,6 +148,7 @@ public class WizardLogic : MonoBehaviour
     {
         if (collision.gameObject.tag == "Bullet")
         {
+            flashtime.setTimer(0.25f);
             ProjectileData bullet = collision.GetComponent<ProjectileData>();
             if(bullet.owner=="boss")
             if (Random.value < bullet.crit)
